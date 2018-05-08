@@ -5,9 +5,12 @@ using UnityEngine;
 public class Movement : MonoBehaviour {
     [SerializeField]
     private float velX;//, velY;
+    public float velPowerUp;
     private bool grounded, click;
     private float temps;
     public static bool isOnAPlatform = false;
+    public static  bool timePickUp, freezePickUp, fasterPickUp;
+    public static float timeFaster, timeFreeze;
 	// Use this for initialization
 	void Start () {
         //vel = this.gameObject.GetComponent<Rigidbody2D>().velocity.x;
@@ -15,8 +18,17 @@ public class Movement : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        //this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector3(1, 0, 0), ForceMode2D.Force);
-        // this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(vel, 0, 0);
+        Debug.Log(fasterPickUp);
+        //pickUps
+        if (fasterPickUp)
+        {
+            
+            timeFaster += Time.deltaTime;
+            if(timeFaster >= 3)
+            {
+                fasterPickUp = false;
+            }
+        }
 
         if (this.gameObject.GetComponent<Rigidbody2D>().IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
@@ -32,26 +44,41 @@ public class Movement : MonoBehaviour {
         }
 
         //android
-        if (Input.touchCount == 1)
+        if (Input.touchCount == 1 && !Control.paused)
         {
             Touch touch = Input.GetTouch(0);
 
-            if (touch.phase == TouchPhase.Began && grounded)
+            if (touch.phase == TouchPhase.Began && grounded) {
                 this.GetComponent<Rigidbody2D>().gravityScale *= -1;
+                this.transform.GetComponent<SpriteRenderer>().flipY = !this.transform.GetComponent<SpriteRenderer>().flipY;
+            }
             //Touch[] touches = Input.touches;
             else if (touch.phase == TouchPhase.Stationary)
-                this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            {
+                this.GetComponent<Animator>().SetBool("Stop", true);
+                this.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            }
             else
             {
-                if (!isOnAPlatform)
-                    this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(velX, 0, 0);
+                if (grounded && !isOnAPlatform)
+                {
+                    if (!fasterPickUp)
+                        this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(velX, 0, 0);
+                    else if (fasterPickUp)
+                        this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(velPowerUp, 0, 0);
+                    this.GetComponent<Animator>().SetBool("Stop", false);
+
+                }
                 else
-                    this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+                {
+                    this.GetComponent<Animator>().SetBool("Stop", true);
+                    this.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                }
             }
         }
 
         //pc
-        if (Input.GetMouseButtonDown(0) && grounded)
+        if (Input.GetMouseButtonDown(0) && grounded && !Control.paused)
         {
             temps = Time.time;
             click = true;
@@ -66,7 +93,10 @@ public class Movement : MonoBehaviour {
         {
             if (grounded && !isOnAPlatform)
             {
-                this.GetComponent<Rigidbody2D>().velocity = new Vector2(velX, 0);
+                if (!fasterPickUp)
+                    this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(velX, 0, 0);
+                else if (fasterPickUp)
+                    this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(velPowerUp, 0, 0);
                 this.GetComponent<Animator>().SetBool("Stop", false);
                 
             }
