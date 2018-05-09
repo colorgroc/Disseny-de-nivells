@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+    [SerializeField]
+    private AudioClip die;
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -22,7 +23,11 @@ public class Bullet : MonoBehaviour {
         if (coll.gameObject.tag == "Player")
         {
             //die
-            Destroy(coll.gameObject);
+            if (!Control.godMode)
+            {
+                Control.sons.PlayOneShot(die);
+                Destroy(coll.gameObject);
+            }
             //show restart menu
         }
     }

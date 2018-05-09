@@ -107,10 +107,14 @@ MonoBehaviour:
   iPoint: {fileID: 0}
   fPoint: {fileID: 0}
   vel: 0
+  freezedVel: 0
   eBullet: {fileID: 0}
   bulletSpeed: 0
+  freezedBulletSpeed: 0
   delay: 0
-  atackSpeed: 0
+  attackSpeed: 0
+  freezeAttackSpeed: 0
+  die: {fileID: 8300000, guid: 265e4b25eb9a1f94f9a4fe42704fea76, type: 3}
 --- !u!212 &212142880641487946
 SpriteRenderer:
   m_ObjectHideFlags: 1

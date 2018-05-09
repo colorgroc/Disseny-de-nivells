@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour {
     public int type;
-	// Use this for initialization
-	void Start () {
+    [SerializeField]
+    private AudioClip freeze, time, faster;
+    // Use this for initialization
+    void Start () {
 		
 	}
 
@@ -14,11 +16,22 @@ public class PickUp : MonoBehaviour {
         if (collision.tag.Equals("Player"))
         {
             if (type == 1)
-                Movement.fasterPickUp = true;
+            {
+                Control.sons.PlayOneShot(faster);
+                Control.fasterPickUp = true;
+                Control.timeFaster = 3;
+            }
             else if (type == 2)
-                Movement.freezePickUp = true;
+            {
+                Control.sons.PlayOneShot(freeze);
+                Control.freezePickUp = true;
+                Control.timeFreeze = 3;
+            }
             else if (type == 3)
+            {
+                Control.sons.PlayOneShot(time);
                 Control.gameTime += 10;
+            }
                 //afegir temps al hud
             Destroy(this.gameObject);
         }

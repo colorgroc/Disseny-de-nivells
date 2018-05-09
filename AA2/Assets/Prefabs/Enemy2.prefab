@@ -141,7 +141,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 1
+  m_Mass: 1.887265
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -180,10 +180,14 @@ MonoBehaviour:
   iPoint: {fileID: 1636978095894164}
   fPoint: {fileID: 1958591895966520}
   vel: 2
+  freezedVel: 0.5
   eBullet: {fileID: 0}
   bulletSpeed: 0
+  freezedBulletSpeed: 0
   delay: 0
-  atackSpeed: 0
+  attackSpeed: 0
+  freezeAttackSpeed: 0
+  die: {fileID: 8300000, guid: 265e4b25eb9a1f94f9a4fe42704fea76, type: 3}
 --- !u!212 &212074590231122072
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -6,12 +6,14 @@ public class Enemies : MonoBehaviour {
     public int type;
     public GameObject iPoint, fPoint;
     bool right;
-    public float vel;
+    public float vel, freezedVel;
     public GameObject eBullet;
-    public float bulletSpeed;
+    public float bulletSpeed, freezedBulletSpeed;
     public float delay;
-    public float atackSpeed;
-    private int bulletCount = 0;
+    public float attackSpeed, freezeAttackSpeed;
+    [SerializeField]
+    private AudioClip die;
+    //private int bulletCount = 0;
     private GameObject player = null;
     // Use this for initialization
     void Start () {
@@ -21,10 +23,7 @@ public class Enemies : MonoBehaviour {
             this.transform.position = new Vector3(iPoint.transform.position.x, this.transform.position.y, this.transform.position.z);
             right = true;
         }
-        //else if (type == 3)
-        //{
 
-        //}
     }
 
 	
@@ -32,10 +31,16 @@ public class Enemies : MonoBehaviour {
 	void Update () {
         if (type == 2)
         {
-            if (right)
-                this.GetComponent<Rigidbody2D>().velocity = new Vector2(vel, 0);
-            else
-                this.GetComponent<Rigidbody2D>().velocity = new Vector2(-vel, 0);
+            if (right) {
+                if (!Control.freezePickUp)
+                    this.GetComponent<Rigidbody2D>().velocity = new Vector2(vel, 0);
+                else this.GetComponent<Rigidbody2D>().velocity = new Vector2(freezedVel, 0);
+            }
+            else {
+                if (!Control.freezePickUp)
+                    this.GetComponent<Rigidbody2D>().velocity = new Vector2(-vel, 0);
+                else this.GetComponent<Rigidbody2D>().velocity = new Vector2(-freezedVel, 0);
+            }
 
             if (this.transform.position.x <= iPoint.transform.position.x && !right)
                 right = !right;
@@ -50,7 +55,11 @@ public class Enemies : MonoBehaviour {
         if (coll.gameObject.tag == "Player")
         {
             //die
-            Destroy(coll.gameObject);
+            if (!Control.godMode)
+            {
+                Control.sons.PlayOneShot(die);
+                Destroy(coll.gameObject);
+            }
             //show restart menu
         }
     }
@@ -60,8 +69,12 @@ public class Enemies : MonoBehaviour {
         if (coll.gameObject.tag == "Player" && type == 3)
         {
             player = coll.gameObject;
-            if(!Control.paused)
-                InvokeRepeating("Shoot", delay, atackSpeed);
+            if (!Control.paused)
+            {
+                if(!Control.freezePickUp)
+                    InvokeRepeating("Shoot", delay, attackSpeed);
+                else InvokeRepeating("Shoot", delay, freezeAttackSpeed);
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D coll)
@@ -79,10 +92,16 @@ public class Enemies : MonoBehaviour {
         GameObject shoot = Instantiate(eBullet, this.transform.position, this.transform.rotation);
         shoot.transform.parent = this.transform;
         Vector3 dir = (player.transform.position - this.transform.position).normalized;
-        if(dir.x < 0) 
-            shoot.GetComponent<Rigidbody2D>().velocity = new Vector3(-bulletSpeed, 0, 0);
-        else
-            shoot.GetComponent<Rigidbody2D>().velocity = new Vector3(bulletSpeed, 0, 0);
+        if (dir.x < 0) {
+            if (!Control.freezePickUp)
+                shoot.GetComponent<Rigidbody2D>().velocity = new Vector3(-bulletSpeed, 0, 0);
+            else shoot.GetComponent<Rigidbody2D>().velocity = new Vector3(-freezedBulletSpeed, 0, 0);
+        }
+        else {
+            if (!Control.freezePickUp)
+                shoot.GetComponent<Rigidbody2D>().velocity = new Vector3(bulletSpeed, 0, 0);
+            else shoot.GetComponent<Rigidbody2D>().velocity = new Vector3(freezedBulletSpeed, 0, 0);
+        }
         
     }
 

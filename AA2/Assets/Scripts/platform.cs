@@ -6,8 +6,9 @@ public class platform : MonoBehaviour {
     public GameObject iPoint, fPoint;
     public bool platHorizontal, enemy;
     bool right, down;
-    public float vel;
-   
+    public float vel, freezedVel;
+    [SerializeField]
+    private AudioClip die;
     // Use this for initialization
     void Start()
     {
@@ -29,9 +30,17 @@ public class platform : MonoBehaviour {
         if (platHorizontal)
         {
             if (right)
-                this.transform.position = new Vector3(this.transform.position.x + vel, this.transform.position.y, this.transform.position.z);
+            {
+                if(!Control.freezePickUp)
+                    this.transform.position = new Vector3(this.transform.position.x + vel, this.transform.position.y, this.transform.position.z);
+                else this.transform.position = new Vector3(this.transform.position.x + freezedVel, this.transform.position.y, this.transform.position.z);
+            }
             else
-                this.transform.position = new Vector3(this.transform.position.x - vel, this.transform.position.y, this.transform.position.z);
+            {
+                if (!Control.freezePickUp)
+                    this.transform.position = new Vector3(this.transform.position.x - vel, this.transform.position.y, this.transform.position.z);
+                else this.transform.position = new Vector3(this.transform.position.x - freezedVel, this.transform.position.y, this.transform.position.z);
+            }
 
             if (this.transform.position.x <= iPoint.transform.position.x && !right)
                 right = !right;
@@ -42,9 +51,17 @@ public class platform : MonoBehaviour {
         else
         {
             if (down)
-                this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - vel, this.transform.position.z);
+            {
+                if (!Control.freezePickUp)
+                    this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - vel, this.transform.position.z);
+                else this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - freezedVel, this.transform.position.z);
+            }
             else
-                this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + vel, this.transform.position.z);
+            {
+                if (!Control.freezePickUp)
+                    this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + vel, this.transform.position.z);
+                else this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + freezedVel, this.transform.position.z);
+            }
 
             if (this.transform.position.y >= iPoint.transform.position.y && !down)
                 down = !down;
@@ -66,7 +83,8 @@ public class platform : MonoBehaviour {
             }
             else
             {
-                Destroy(coll.gameObject);
+                if(!Control.godMode)
+                    Destroy(coll.gameObject);
             }
         }
     }
@@ -83,7 +101,11 @@ public class platform : MonoBehaviour {
             else
             {
                 //show restart canvas
-                Destroy(coll.gameObject);
+                if (!Control.godMode)
+                {
+                    Destroy(coll.gameObject);
+                    Control.sons.PlayOneShot(die);
+                }
             }
             
         }

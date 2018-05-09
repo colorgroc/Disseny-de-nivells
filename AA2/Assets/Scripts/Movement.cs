@@ -9,26 +9,17 @@ public class Movement : MonoBehaviour {
     private bool grounded, click;
     private float temps;
     public static bool isOnAPlatform = false;
-    public static  bool timePickUp, freezePickUp, fasterPickUp;
-    public static float timeFaster, timeFreeze;
-	// Use this for initialization
-	void Start () {
+    [SerializeField]
+    private AudioClip jump;
+    // Use this for initialization
+    void Start () {
         //vel = this.gameObject.GetComponent<Rigidbody2D>().velocity.x;
     }
 
     // Update is called once per frame
     void Update () {
-        Debug.Log(fasterPickUp);
-        //pickUps
-        if (fasterPickUp)
-        {
-            
-            timeFaster += Time.deltaTime;
-            if(timeFaster >= 3)
-            {
-                fasterPickUp = false;
-            }
-        }
+  
+       
 
         if (this.gameObject.GetComponent<Rigidbody2D>().IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
@@ -41,6 +32,7 @@ public class Movement : MonoBehaviour {
             this.grounded = false;
             this.GetComponent<Animator>().SetBool("Stop", false);
             this.GetComponent<Animator>().SetBool("Jump", true);
+            //Control.sons.PlayOneShot(jump);
         }
 
         //android
@@ -49,6 +41,7 @@ public class Movement : MonoBehaviour {
             Touch touch = Input.GetTouch(0);
 
             if (touch.phase == TouchPhase.Began && grounded) {
+                Control.sons.PlayOneShot(jump);
                 this.GetComponent<Rigidbody2D>().gravityScale *= -1;
                 this.transform.GetComponent<SpriteRenderer>().flipY = !this.transform.GetComponent<SpriteRenderer>().flipY;
             }
@@ -62,9 +55,9 @@ public class Movement : MonoBehaviour {
             {
                 if (grounded && !isOnAPlatform)
                 {
-                    if (!fasterPickUp)
+                    if (!Control.fasterPickUp)
                         this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(velX, 0, 0);
-                    else if (fasterPickUp)
+                    else if (Control.fasterPickUp)
                         this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(velPowerUp, 0, 0);
                     this.GetComponent<Animator>().SetBool("Stop", false);
 
@@ -93,9 +86,9 @@ public class Movement : MonoBehaviour {
         {
             if (grounded && !isOnAPlatform)
             {
-                if (!fasterPickUp)
+                if (!Control.fasterPickUp)
                     this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(velX, 0, 0);
-                else if (fasterPickUp)
+                else if (Control.fasterPickUp)
                     this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(velPowerUp, 0, 0);
                 this.GetComponent<Animator>().SetBool("Stop", false);
                 
@@ -113,7 +106,8 @@ public class Movement : MonoBehaviour {
 
             if ((Time.time - temps) < 0.15)
             {
-               // this.GetComponent<Animator>().SetBool("Jump", true);
+                Control.sons.PlayOneShot(jump);
+                // this.GetComponent<Animator>().SetBool("Jump", true);
                 this.GetComponent<Rigidbody2D>().gravityScale *= -1;
                 this.transform.GetComponent<SpriteRenderer>().flipY = !this.transform.GetComponent<SpriteRenderer>().flipY;
             }

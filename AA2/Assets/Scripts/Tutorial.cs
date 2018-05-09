@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tutorial : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+    [SerializeField]
+    private AudioClip accept;
+    // Use this for initialization
+    void Start () {
         Time.timeScale = 0;
 	}
 	
@@ -15,6 +16,7 @@ public class Tutorial : MonoBehaviour {
         {
             this.gameObject.SetActive(false);
             Time.timeScale = 1;
+            Control.sons.PlayOneShot(accept);
         }
 	}
 }

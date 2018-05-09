@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1204476864236194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.68, y: -1.1, z: 0.016578}
+  m_LocalPosition: {x: 6.68, y: -3.8, z: 0.016578}
   m_LocalScale: {x: 1.4286605, y: 1.4286598, z: 1.4286598}
   m_Children: []
   m_Father: {fileID: 0}
@@ -118,6 +118,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velX: 15
+  velPowerUp: 30
+  jump: {fileID: 8300000, guid: 352b72af087ed6c47ac63c10f9d90360, type: 3}
 --- !u!212 &212556673102971542
 SpriteRenderer:
   m_ObjectHideFlags: 1

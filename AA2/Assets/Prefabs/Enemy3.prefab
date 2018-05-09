@@ -29,7 +29,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4287985564147534
 Transform:
   m_ObjectHideFlags: 1
@@ -108,10 +108,14 @@ MonoBehaviour:
   iPoint: {fileID: 0}
   fPoint: {fileID: 0}
   vel: 0
+  freezedVel: 0
   eBullet: {fileID: 1796505210461066, guid: fdec0bc1c19a25943a3b4e2de9b592d6, type: 2}
   bulletSpeed: 3
+  freezedBulletSpeed: 1
   delay: 0
-  atackSpeed: 0.5
+  attackSpeed: 0
+  freezeAttackSpeed: 1
+  die: {fileID: 8300000, guid: 265e4b25eb9a1f94f9a4fe42704fea76, type: 3}
 --- !u!212 &212389742731011978
 SpriteRenderer:
   m_ObjectHideFlags: 1
