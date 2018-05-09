@@ -88,7 +88,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4087006294746872
 Transform:
   m_ObjectHideFlags: 1
@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 1199829847905642}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 29.456278, y: -1.2070696, z: 0.09672583}
-  m_LocalScale: {x: 0.65684104, y: 0.32513642, z: 0.65684104}
+  m_LocalScale: {x: 0.3373078, y: 0.32513642, z: 0.65684104}
   m_Children: []
   m_Father: {fileID: 4676347186923908}
   m_RootOrder: 1
@@ -199,6 +199,8 @@ MonoBehaviour:
   platHorizontal: 1
   enemy: 1
   vel: 0.05
+  freezedVel: 0
+  die: {fileID: 0}
 --- !u!212 &212199984126233120
 SpriteRenderer:
   m_ObjectHideFlags: 1
