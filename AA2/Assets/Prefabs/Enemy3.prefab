@@ -29,7 +29,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4287985564147534
 Transform:
   m_ObjectHideFlags: 1
@@ -117,6 +117,7 @@ MonoBehaviour:
   attackSpeed: 0
   freezeAttackSpeed: 1
   die: {fileID: 8300000, guid: 265e4b25eb9a1f94f9a4fe42704fea76, type: 3}
+  loser: {fileID: 8300000, guid: de4fd8e012b70b542923060a3fd006f2, type: 3}
 --- !u!212 &212389742731011978
 SpriteRenderer:
   m_ObjectHideFlags: 1

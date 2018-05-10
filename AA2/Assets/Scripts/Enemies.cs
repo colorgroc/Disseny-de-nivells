@@ -12,7 +12,7 @@ public class Enemies : MonoBehaviour {
     public float delay;
     public float attackSpeed, freezeAttackSpeed;
     [SerializeField]
-    private AudioClip die;
+    private AudioClip die, loser;
     //private int bulletCount = 0;
     private GameObject player = null;
     // Use this for initialization
@@ -70,7 +70,9 @@ public class Enemies : MonoBehaviour {
                 Control.sons.PlayOneShot(die);
                 Destroy(coll.gameObject);
                 GameObject.Find("Control").GetComponent<Control>().restart.enabled = true;
+                Time.timeScale = 0;
                 GameObject.Find("Control").GetComponent<Control>().music.Stop();
+                Control.sons.PlayOneShot(loser);
             }
             //show restart menu
         }

@@ -19,8 +19,6 @@ public class Movement : MonoBehaviour {
     // Update is called once per frame
     void Update () {
   
-       
-
         if (this.gameObject.GetComponent<Rigidbody2D>().IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             this.grounded = true;
@@ -44,7 +42,7 @@ public class Movement : MonoBehaviour {
         if (click && (Time.time - temps) > 0.15)
         {
             this.GetComponent<Animator>().SetBool("Stop", true);
-            this.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
         else
         {
@@ -54,13 +52,12 @@ public class Movement : MonoBehaviour {
                     this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(velX, 0, 0);
                 else if (Control.fasterPickUp)
                     this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(velPowerUp, 0, 0);
-                this.GetComponent<Animator>().SetBool("Stop", false);
-                
+                this.GetComponent<Animator>().SetBool("Stop", false);               
             }
             else
             {
                 this.GetComponent<Animator>().SetBool("Stop", true);
-                this.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
         }
 

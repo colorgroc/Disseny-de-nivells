@@ -189,6 +189,7 @@ MonoBehaviour:
   attackSpeed: 0
   freezeAttackSpeed: 0
   die: {fileID: 8300000, guid: 265e4b25eb9a1f94f9a4fe42704fea76, type: 3}
+  loser: {fileID: 8300000, guid: de4fd8e012b70b542923060a3fd006f2, type: 3}
 --- !u!212 &212074590231122072
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
     [SerializeField]
-    private AudioClip die;
+    private AudioClip die, loser;
     // Use this for initialization
     void Start () {
        
@@ -30,6 +30,7 @@ public class Bullet : MonoBehaviour {
                 Destroy(coll.gameObject);
                 GameObject.Find("Control").GetComponent<Control>().restart.enabled = true;
                 GameObject.Find("Control").GetComponent<Control>().music.Stop();
+                Control.sons.PlayOneShot(loser);
             }
             //show restart menu
         }

@@ -41,12 +41,13 @@ public class Control : MonoBehaviour {
     }
     private void Start()
     {
-        timeFaster = timeFreeze = 3;
+        timeFaster = 3;
+        timeFreeze = 4;
         Time.timeScale = 1;
     }
     // Update is called once per frame
     void Update () {
-
+            
         if (Input.GetKeyUp(KeyCode.Escape))
             paused = true;
         if (paused)

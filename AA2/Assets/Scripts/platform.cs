@@ -8,7 +8,7 @@ public class platform : MonoBehaviour {
     bool right, down;
     public float vel, freezedVel;
     [SerializeField]
-    private AudioClip die;
+    private AudioClip die, loser;
     // Use this for initialization
     void Start()
     {
@@ -106,7 +106,21 @@ public class platform : MonoBehaviour {
         }
     }
 
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (enemy && collision.gameObject.tag == "Player")
+        {
+            if (!Control.godMode)
+            {
+                Destroy(collision.gameObject);
+                Control.sons.PlayOneShot(die);
+                GameObject.Find("Control").GetComponent<Control>().restart.enabled = true;
+                Time.timeScale = 0;
+                GameObject.Find("Control").GetComponent<Control>().music.Stop();
+                Control.sons.PlayOneShot(loser);
+            }
+        }
+    }
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "Player")
@@ -115,16 +129,6 @@ public class platform : MonoBehaviour {
             {
                 coll.transform.parent = this.transform;
                 Movement.isOnAPlatform = true;
-            }
-            else if(enemy)
-            {
-                if (!Control.godMode)
-                {
-                    Destroy(coll.gameObject);
-                    Control.sons.PlayOneShot(die);
-                    GameObject.Find("Control").GetComponent<Control>().restart.enabled = true;
-                    GameObject.Find("Control").GetComponent<Control>().music.Stop();
-                }
             }
         }
     }

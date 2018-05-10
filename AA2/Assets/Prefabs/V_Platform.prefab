@@ -375,6 +375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iPoint: {fileID: 1861839178324702}
   fPoint: {fileID: 1781355731314480}
+  startPoint: {fileID: 0}
   platHorizontal: 0
   enemy: 0
   vel: 0.05

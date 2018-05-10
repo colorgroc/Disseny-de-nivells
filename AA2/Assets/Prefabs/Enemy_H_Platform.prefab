@@ -167,7 +167,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -200,8 +200,9 @@ MonoBehaviour:
   platHorizontal: 1
   enemy: 1
   vel: 0.05
-  freezedVel: 0
+  freezedVel: 0.03
   die: {fileID: 8300000, guid: 265e4b25eb9a1f94f9a4fe42704fea76, type: 3}
+  loser: {fileID: 8300000, guid: de4fd8e012b70b542923060a3fd006f2, type: 3}
 --- !u!212 &212199984126233120
 SpriteRenderer:
   m_ObjectHideFlags: 1
