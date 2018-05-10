@@ -48,7 +48,7 @@ public class Movement : MonoBehaviour {
         }
         else
         {
-            if (grounded && !isOnAPlatform)
+            if (grounded)// && !isOnAPlatform)
             {
                 if (!Control.fasterPickUp)
                     this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(velX, 0, 0);

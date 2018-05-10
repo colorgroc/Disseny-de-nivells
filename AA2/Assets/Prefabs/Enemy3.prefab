@@ -107,10 +107,11 @@ MonoBehaviour:
   type: 3
   iPoint: {fileID: 0}
   fPoint: {fileID: 0}
+  startPoint: {fileID: 0}
   vel: 0
   freezedVel: 0
   eBullet: {fileID: 1796505210461066, guid: fdec0bc1c19a25943a3b4e2de9b592d6, type: 2}
-  bulletSpeed: 3
+  bulletSpeed: 5
   freezedBulletSpeed: 1
   delay: 0
   attackSpeed: 0
