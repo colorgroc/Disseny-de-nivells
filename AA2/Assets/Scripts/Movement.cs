@@ -35,42 +35,6 @@ public class Movement : MonoBehaviour {
             //Control.sons.PlayOneShot(jump);
         }
 
-        //android
-        if (Input.touchCount == 1 && !Control.paused)
-        {
-            Touch touch = Input.GetTouch(0);
-
-            if (touch.phase == TouchPhase.Began && grounded) {
-                Control.sons.PlayOneShot(jump);
-                this.GetComponent<Rigidbody2D>().gravityScale *= -1;
-                this.transform.GetComponent<SpriteRenderer>().flipY = !this.transform.GetComponent<SpriteRenderer>().flipY;
-            }
-            //Touch[] touches = Input.touches;
-            else if (touch.phase == TouchPhase.Stationary)
-            {
-                this.GetComponent<Animator>().SetBool("Stop", true);
-                this.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            }
-            else
-            {
-                if (grounded && !isOnAPlatform)
-                {
-                    if (!Control.fasterPickUp)
-                        this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(velX, 0, 0);
-                    else if (Control.fasterPickUp)
-                        this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(velPowerUp, 0, 0);
-                    this.GetComponent<Animator>().SetBool("Stop", false);
-
-                }
-                else
-                {
-                    this.GetComponent<Animator>().SetBool("Stop", true);
-                    this.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                }
-            }
-        }
-
-        //pc
         if (Input.GetMouseButtonDown(0) && grounded && !Control.paused)
         {
             temps = Time.time;
