@@ -37,9 +37,9 @@ GameObject:
   - component: {fileID: 114168988341913388}
   - component: {fileID: 212199984126233120}
   - component: {fileID: 61664073551339290}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: platH
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -196,11 +196,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iPoint: {fileID: 1509903128158606}
   fPoint: {fileID: 1055644502817964}
+  startPoint: {fileID: 0}
   platHorizontal: 1
   enemy: 1
   vel: 0.05
   freezedVel: 0
-  die: {fileID: 0}
+  die: {fileID: 8300000, guid: 265e4b25eb9a1f94f9a4fe42704fea76, type: 3}
 --- !u!212 &212199984126233120
 SpriteRenderer:
   m_ObjectHideFlags: 1

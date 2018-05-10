@@ -116,7 +116,7 @@ public class platform : MonoBehaviour {
                 coll.transform.parent = this.transform;
                 Movement.isOnAPlatform = true;
             }
-            else
+            else if(enemy)
             {
                 if (!Control.godMode)
                 {
