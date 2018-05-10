@@ -15,14 +15,14 @@ public class Menu : MonoBehaviour
     private void Awake()
     {
         //not working properly gsg
-        /*if (PlayerPrefs.GetInt("God") == 0)
+        if (PlayerPrefs.GetInt("God") == 0)
             god = false;
         else if (PlayerPrefs.GetInt("God") == 1)
             god = true;
         if (god)
             godMode.isOn = true;
         else if (!god)
-           godMode.isOn = false;*/
+           godMode.isOn = false;
     }
     public void Tutorial()
     {

@@ -25,7 +25,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1284793226087338
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,8 +82,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1958591895966520}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36.21, y: -3.95, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 16.44859, y: -1.056935, z: -1.1869878}
+  m_LocalScale: {x: 3.3029225, y: 3.3029225, z: 3.3029225}
   m_Children: []
   m_Father: {fileID: 4309911448772284}
   m_RootOrder: 1
@@ -94,9 +94,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1204816655747934}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 158.04, y: -3.76, z: 0.359375}
+  m_LocalScale: {x: 0.30276215, y: 0.30276215, z: 0.30276215}
   m_Children:
   - {fileID: 4318441872249306}
   - {fileID: 4290066826335740}
@@ -111,8 +111,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1636978095894164}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 26.06, y: -3.95, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -17.076103, y: -1.056935, z: -1.1869878}
+  m_LocalScale: {x: 3.3029225, y: 3.3029225, z: 3.3029225}
   m_Children: []
   m_Father: {fileID: 4309911448772284}
   m_RootOrder: 0
@@ -124,8 +124,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1284793226087338}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 31.23, y: -3.63, z: 0.359375}
-  m_LocalScale: {x: 0.30276215, y: 0.30276215, z: 0.30276215}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4309911448772284}
   m_RootOrder: 2
@@ -144,7 +144,7 @@ Rigidbody2D:
   m_Mass: 1.887265
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -179,7 +179,8 @@ MonoBehaviour:
   type: 2
   iPoint: {fileID: 1636978095894164}
   fPoint: {fileID: 1958591895966520}
-  vel: 2
+  startPoint: {fileID: 0}
+  vel: 3
   freezedVel: 0.5
   eBullet: {fileID: 0}
   bulletSpeed: 0

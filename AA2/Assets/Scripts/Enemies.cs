@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemies : MonoBehaviour {
     public int type;
-    public GameObject iPoint, fPoint;
+    public GameObject iPoint, fPoint, startPoint;
     bool right;
     public float vel, freezedVel;
     public GameObject eBullet;
@@ -20,8 +20,18 @@ public class Enemies : MonoBehaviour {
 
         if (type == 2)
         {
-            this.transform.position = new Vector3(iPoint.transform.position.x, this.transform.position.y, this.transform.position.z);
-            right = true;
+            if (startPoint == null)
+            {
+                this.transform.position = new Vector3(iPoint.transform.position.x, this.transform.position.y, this.transform.position.z);
+                right = true;
+            }
+            else
+            {
+                this.transform.position = new Vector3(startPoint.transform.position.x, this.transform.position.y, this.transform.position.z);
+                if (startPoint == iPoint)
+                    right = true;
+                else right = false;
+            }
         }
 
     }
@@ -59,6 +69,8 @@ public class Enemies : MonoBehaviour {
             {
                 Control.sons.PlayOneShot(die);
                 Destroy(coll.gameObject);
+                GameObject.Find("Control").GetComponent<Control>().restart.enabled = true;
+                GameObject.Find("Control").GetComponent<Control>().music.Stop();
             }
             //show restart menu
         }

@@ -18,6 +18,7 @@ public class Control : MonoBehaviour {
     [SerializeField]
     private AudioClip accept, back, loser, win;
     private bool once;
+    public float timeGame;
 
     public static bool won, freezePickUp, timePickUp, fasterPickUp;
 	// Use this for initialization
@@ -28,13 +29,15 @@ public class Control : MonoBehaviour {
         sons = GameObject.Find("Sons").GetComponent<AudioSource>();
         freeze.enabled = false;
         faster.enabled = false;
-        won = paused = false;
-        gameTime = 120f;
+        won = paused = freezePickUp = timePickUp = fasterPickUp = false;
+        timeFaster = timeFreeze = 0;
+        gameTime = timeGame;
         if (PlayerPrefs.GetInt("God") == 1)
             godMode = true;
         else if(PlayerPrefs.GetInt("God") == 0)
             godMode = false;
         once = false;
+        //Debug.Log(godMode);
     }
     private void Start()
     {
@@ -45,11 +48,11 @@ public class Control : MonoBehaviour {
     void Update () {
 
         if (Input.GetKeyUp(KeyCode.Escape))
-            SetPauseBool();
+            paused = true;
         if (paused)
             Pause();
-       
-        gameTime -= Time.deltaTime;
+        if(gameTime > 0)
+            gameTime -= Time.deltaTime;
         temps.text = GetMinutes(gameTime);
 
         if (won)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class platform : MonoBehaviour {
-    public GameObject iPoint, fPoint;
+    public GameObject iPoint, fPoint, startPoint;
     public bool platHorizontal, enemy;
     bool right, down;
     public float vel, freezedVel;
@@ -14,13 +14,33 @@ public class platform : MonoBehaviour {
     {
         if (platHorizontal)
         {
-            this.transform.position = new Vector3(iPoint.transform.position.x, this.transform.position.y, this.transform.position.z);
-            right = true;
+            if (startPoint == null)
+            {
+                this.transform.position = new Vector3(this.transform.position.x, iPoint.transform.position.y, this.transform.position.z);
+                right = true;
+            }
+            else
+            {
+                this.transform.position = new Vector3(this.transform.position.x, startPoint.transform.position.y, this.transform.position.z);
+                if (startPoint == iPoint)
+                    right = true;
+                else right = false;
+            }
         }
         else
         {
-            this.transform.position = new Vector3(this.transform.position.x, iPoint.transform.position.y, this.transform.position.z);
-            down = true;
+            if (startPoint == null)
+            {
+                this.transform.position = new Vector3(this.transform.position.x, iPoint.transform.position.y, this.transform.position.z);
+                down = true;
+            }
+            else
+            {
+                this.transform.position = new Vector3(this.transform.position.x, startPoint.transform.position.y, this.transform.position.z);
+                if (startPoint == iPoint)
+                    down = true;
+                else down = false;
+            }
         }
     }
 
@@ -31,15 +51,23 @@ public class platform : MonoBehaviour {
         {
             if (right)
             {
-                if(!Control.freezePickUp)
-                    this.transform.position = new Vector3(this.transform.position.x + vel, this.transform.position.y, this.transform.position.z);
-                else this.transform.position = new Vector3(this.transform.position.x + freezedVel, this.transform.position.y, this.transform.position.z);
+                if (enemy)
+                {
+                    if (!Control.freezePickUp)
+                        this.transform.position = new Vector3(this.transform.position.x + vel, this.transform.position.y, this.transform.position.z);
+                    else this.transform.position = new Vector3(this.transform.position.x + freezedVel, this.transform.position.y, this.transform.position.z);
+                }
+                else this.transform.position = new Vector3(this.transform.position.x + vel, this.transform.position.y, this.transform.position.z);
             }
             else
             {
-                if (!Control.freezePickUp)
-                    this.transform.position = new Vector3(this.transform.position.x - vel, this.transform.position.y, this.transform.position.z);
-                else this.transform.position = new Vector3(this.transform.position.x - freezedVel, this.transform.position.y, this.transform.position.z);
+                if (enemy)
+                {
+                    if (!Control.freezePickUp)
+                        this.transform.position = new Vector3(this.transform.position.x - vel, this.transform.position.y, this.transform.position.z);
+                    else this.transform.position = new Vector3(this.transform.position.x - freezedVel, this.transform.position.y, this.transform.position.z);
+                }
+                else this.transform.position = new Vector3(this.transform.position.x - vel, this.transform.position.y, this.transform.position.z);
             }
 
             if (this.transform.position.x <= iPoint.transform.position.x && !right)
@@ -52,15 +80,22 @@ public class platform : MonoBehaviour {
         {
             if (down)
             {
-                if (!Control.freezePickUp)
-                    this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - vel, this.transform.position.z);
-                else this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - freezedVel, this.transform.position.z);
+                if (enemy)
+                {
+                    if (!Control.freezePickUp)
+                        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - vel, this.transform.position.z);
+                    else this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - freezedVel, this.transform.position.z);
+                }
+                else this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - vel, this.transform.position.z);
             }
             else
             {
-                if (!Control.freezePickUp)
-                    this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + vel, this.transform.position.z);
-                else this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + freezedVel, this.transform.position.z);
+                if (enemy)
+                {
+                    if (!Control.freezePickUp)
+                        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + vel, this.transform.position.z);
+                    else this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + freezedVel, this.transform.position.z);
+                } else this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + vel, this.transform.position.z);
             }
 
             if (this.transform.position.y >= iPoint.transform.position.y && !down)
@@ -83,8 +118,13 @@ public class platform : MonoBehaviour {
             }
             else
             {
-                if(!Control.godMode)
+                if (!Control.godMode)
+                {
                     Destroy(coll.gameObject);
+                    Control.sons.PlayOneShot(die);
+                    GameObject.Find("Control").GetComponent<Control>().restart.enabled = true;
+                    GameObject.Find("Control").GetComponent<Control>().music.Stop();
+                }
             }
         }
     }
@@ -98,16 +138,6 @@ public class platform : MonoBehaviour {
                 coll.transform.parent = null;
                 Movement.isOnAPlatform = false;
             }
-            else
-            {
-                //show restart canvas
-                if (!Control.godMode)
-                {
-                    Destroy(coll.gameObject);
-                    Control.sons.PlayOneShot(die);
-                }
-            }
-            
         }
     }
 
